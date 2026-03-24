@@ -1,0 +1,36 @@
+{
+  "name": "rogue-game",
+  "version": "1.0.0",
+  "description": "A roguelike 2D game built with Phaser + TypeScript + Vite",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "tauri:dev": "tauri dev",
+    "tauri:build": "tauri build",
+    "cap:init": "cap init rogue-game com.roguegame.app --web-dir dist",
+    "cap:add:android": "cap add android",
+    "cap:add:ios": "cap add ios",
+    "cap:sync": "cap sync",
+    "cap:open:android": "cap open android",
+    "cap:open:ios": "cap open ios",
+    "build:all": "pnpm build && pnpm tauri:build"
+  },
+  "keywords": ["roguelike", "game", "phaser", "typescript", "vite"],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.8.1",
+  "dependencies": {
+    "phaser": "^3.90.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^7.2.0",
+    "@capacitor/core": "^7.2.0",
+    "@tauri-apps/cli": "^2.4.0",
+    "@types/node": "^25.5.0",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.2"
+  }
+}
