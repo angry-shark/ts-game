@@ -18,12 +18,19 @@
     "cap:open:ios": "cap open ios",
     "build:all": "pnpm build && pnpm tauri:build"
   },
-  "keywords": ["roguelike", "game", "phaser", "typescript", "vite"],
+  "keywords": [
+    "roguelike",
+    "game",
+    "phaser",
+    "typescript",
+    "vite"
+  ],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.8.1",
   "dependencies": {
-    "phaser": "^3.90.0"
+    "phaser": "^3.90.0",
+    "phaser3-rex-plugins": "^1.80.17"
   },
   "devDependencies": {
     "@capacitor/cli": "^7.2.0",

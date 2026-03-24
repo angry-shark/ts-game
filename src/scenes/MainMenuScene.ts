@@ -16,7 +16,7 @@ export class MainMenuScene extends Phaser.Scene {
     this.add.rectangle(width / 2, height / 2, width, height, 0x1a1a2e);
 
     // 标题
-    const title = this.add.text(width / 2, height / 3, 'ROGUELIKE\nADVENTURE', {
+    const title = this.add.text(width / 2, height / 3, '修仙传说\n鬼谷八荒', {
       fontSize: '64px',
       fontStyle: 'bold',
       color: '#4ade80',
@@ -85,7 +85,7 @@ export class MainMenuScene extends Phaser.Scene {
   private confirmSelection(): void {
     switch (this.selectedIndex) {
       case 0:
-        this.scene.start('ECSScene');
+        this.scene.start('WorldScene');
         break;
       case 1:
         this.showInstructions();

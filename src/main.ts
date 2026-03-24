@@ -1,8 +1,8 @@
 import Phaser from 'phaser';
 import { BootScene } from '@scenes/BootScene';
 import { MainMenuScene } from '@scenes/MainMenuScene';
-import { ECSScene } from '@scenes/ECSScene';
-import { ECSUIScene } from '@scenes/ECSUIScene';
+import { WorldScene } from '@scenes/WorldScene';
+import { CardBattleScene } from '@scenes/card/CardBattleScene';
 import { GameOverScene } from '@scenes/GameOverScene';
 
 const config: Phaser.Types.Core.GameConfig = {
@@ -11,7 +11,7 @@ const config: Phaser.Types.Core.GameConfig = {
   width: 1280,
   height: 720,
   backgroundColor: '#1a1a2e',
-  pixelArt: true,
+  pixelArt: false,
   scale: {
     mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
@@ -23,7 +23,7 @@ const config: Phaser.Types.Core.GameConfig = {
       debug: false,
     },
   },
-  scene: [BootScene, MainMenuScene, ECSScene, ECSUIScene, GameOverScene],
+  scene: [BootScene, MainMenuScene, WorldScene, CardBattleScene, GameOverScene],
 };
 
 new Phaser.Game(config);

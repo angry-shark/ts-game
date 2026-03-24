@@ -1,6 +1,6 @@
-# Rogue Game
+# Rogue Game - 鬼谷八荒风格修仙游戏
 
-一个基于 **Phaser 3 + TypeScript + Vite** 开发的 Roguelike 2D 游戏。
+基于 Phaser 3 + TypeScript + Vite 开发的开放世界修仙游戏，参考《鬼谷八荒》核心玩法，战斗系统参考《杀戮尖塔2》。
 
 ## 技术栈
 
@@ -9,121 +9,125 @@
 | Phaser | 3.90 | 游戏引擎 |
 | TypeScript | 6.0+ | 开发语言 |
 | Vite | 8.0+ | 构建工具 |
-| Tauri v2 | 2.4+ | 桌面端打包 (Windows/macOS/Linux) |
-| Capacitor | 7.2+ | 移动端打包 (iOS/Android) |
+| ECS 架构 | 自定义 | 实体组件系统 |
 
-## 快速开始
+## 已完成功能
 
-### 安装依赖
+### ✅ 阶段1: 基础修仙框架
 
-```bash
-pnpm install
-```
+#### 核心系统
+- **境界系统**: 炼气→筑基→结晶→金丹→元婴→化神→悟道→羽化→登仙
+- **属性系统**: 攻击、防御、暴击、移速、五行亲和
+- **修炼系统**: 灵气积累、境界突破
+- **寿元系统**: 年龄、寿元、境界增加寿元
 
-### 开发模式
+#### 功法流派 (10种)
+- 剑修: 高暴击、穿透
+- 刀修: 高伤害、吸血
+- 拳修: 连击、控制
+- 指修: 远程、dot
+- 雷修: 范围、麻痹
+- 火修: 燃烧、爆发
+- 水修: 治疗、减伤
+- 土修: 防御、反伤
+- 风修: 移速、闪避
+- 木修: 召唤、持续
 
-```bash
-pnpm dev
-```
+### ✅ 阶段2: 战斗系统（杀戮尖塔2风格）
 
-### 构建 Web 版本
+#### 回合制卡牌战斗
+- **能量系统**: 每回合3点能量
+- **手牌系统**: 5张手牌上限
+- **抽牌弃牌**: 抽牌堆、弃牌堆循环
+- **卡牌类型**: 攻击、技能、能力、状态
 
-```bash
-pnpm build
-```
+#### 卡牌效果
+- **打击**: 造成6点伤害
+- **防御**: 获得5点格挡
+- **重击**: 造成伤害并给予易伤
 
-## 跨平台打包
+#### 战斗状态
+- **格挡**: 抵挡伤害
+- **易伤**: 受到伤害+50%
+- **虚弱**: 造成伤害-25%
 
-### 桌面端 (Tauri)
+## 操作说明
 
-```bash
-# 开发模式
-pnpm tauri:dev
-
-# 构建生产版本
-pnpm tauri:build
-```
-
-构建完成后，安装包位于 `src-tauri/target/release/bundle/`。
-
-### 移动端 (Capacitor)
-
-```bash
-# 1. 构建 Web 资源
-pnpm build
-
-# 2. 添加平台（首次需要）
-pnpm cap:add:android
-pnpm cap:add:ios
-
-# 3. 同步 Web 资源到原生项目
-pnpm cap:sync
-
-# 4. 打开原生 IDE
-pnpm cap:open:android  # Android Studio
-pnpm cap:open:ios      # Xcode
-```
-
-## 游戏操作
-
+### 大地图
 | 按键 | 功能 |
 |------|------|
-| ↑ ↓ ← → / WASD | 移动角色 |
-| SPACE | 等待一回合 |
-| 方向键 + 敌人 | 攻击 |
-| ESC | 返回/暂停 |
+| W/A/S/D 或 方向键 | 移动 |
+| 靠近敌人 | 触发战斗 |
+
+### 卡牌战斗
+| 操作 | 功能 |
+|------|------|
+| 点击卡牌 | 打出卡牌 |
+| 结束回合按钮 | 结束回合 |
 
 ## 项目结构
 
 ```
-rogue-game/
-├── src/
-│   ├── scenes/          # 游戏场景
-│   │   ├── BootScene.ts      # 启动场景（资源加载）
-│   │   ├── MainMenuScene.ts  # 主菜单
-│   │   ├── GameScene.ts      # 主游戏场景
-│   │   ├── UIScene.ts        # UI 场景
-│   │   └── GameOverScene.ts  # 游戏结束
-│   ├── entities/        # 游戏实体
-│   │   ├── Player.ts    # 玩家
-│   │   ├── Enemy.ts     # 敌人
-│   │   └── Item.ts      # 物品
-│   ├── systems/         # 游戏系统
-│   │   └── MapSystem.ts # 地图生成系统
-│   ├── types/           # TypeScript 类型
-│   │   └── game.ts
-│   ├── utils/           # 工具函数
-│   │   └── index.ts
-│   └── main.ts          # 游戏入口
-├── src-tauri/           # Tauri 桌面端配置
-├── assets/              # 游戏资源
-├── dist/                # 构建输出
-├── index.html
-├── package.json
-├── tsconfig.json
-├── vite.config.ts
-└── capacitor.config.ts  # Capacitor 配置
+src/
+├── components/
+│   ├── core/           # 核心组件
+│   │   ├── Cultivation.ts    # 修炼境界
+│   │   ├── Attributes.ts     # 基础属性
+│   │   ├── Identity.ts       # 身份信息
+│   │   └── Transform.ts      # 位置变换
+│   ├── combat/         # 战斗组件
+│   │   ├── Skills.ts         # 技能系统
+│   │   └── Combat.ts         # 战斗状态
+│   ├── card/           # 卡牌组件
+│   │   ├── Card.ts           # 卡牌数据
+│   │   ├── Deck.ts           # 卡组系统
+│   │   └── CardCombat.ts     # 卡牌战斗状态
+│   └── items/          # 物品组件
+│       ├── Inventory.ts      # 背包
+│       ├── Equipment.ts      # 装备
+│       └── Render.ts         # 渲染
+├── systems/ecs/
+│   ├── core/           # 核心系统
+│   │   ├── AttributeSystem.ts
+│   │   ├── MovementSystem.ts
+│   │   └── RenderSystem.ts
+│   ├── combat/         # 战斗系统
+│   │   ├── CombatSystem.ts
+│   │   └── SkillSystem.ts
+│   └── index.ts
+├── scenes/
+│   ├── WorldScene.ts           # 大世界场景
+│   └── card/
+│       └── CardBattleScene.ts  # 卡牌战斗场景
+├── factories/
+│   └── EntityFactory.ts        # 实体工厂
+└── ecs/
+    └── World.ts                # ECS核心
 ```
 
-## 游戏特性
+## 开发计划
 
-- 🗺️ **程序化地图生成**：每次游戏生成不同的地下城布局
-- 👾 **回合制战斗**：经典的 roguelike 战斗系统
-- 📈 **渐进难度**：随着层数增加，敌人会变强
-- 🎨 **程序化纹理**：无需外部资源，自动生成的游戏素材
-- 📱 **跨平台支持**：Web、桌面端、移动端全覆盖
+- [x] 阶段1: 基础修仙框架
+- [x] 阶段2: 卡牌战斗系统
+- [ ] 阶段3: 更多卡牌和技能
+- [ ] 阶段4: NPC与社交系统
+- [ ] 阶段5: 奇遇与探索系统
+- [ ] 阶段6: 物品与装备系统
+- [ ] 阶段7: 宗门系统
+- [ ] 阶段8: 大地图生成
 
-## 平台支持状态
+## 快速开始
 
-| 平台 | 状态 | 工具 |
-|------|------|------|
-| Web | ✅ 完成 | Vite |
-| Windows | ✅ 支持 | Tauri v2 |
-| macOS | ✅ 支持 | Tauri v2 |
-| Linux | ✅ 支持 | Tauri v2 |
-| iOS | ✅ 支持 | Capacitor |
-| Android | ✅ 支持 | Capacitor |
-| Steam | 🚧 需接入 Steamworks.js | Tauri |
+```bash
+# 安装依赖
+pnpm install
+
+# 开发模式
+pnpm dev
+
+# 构建
+pnpm build
+```
 
 ## License
 
