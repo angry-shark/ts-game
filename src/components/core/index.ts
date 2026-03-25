@@ -17,3 +17,6 @@ export { createIdentity, getRemainingLifespan, increaseLifespanByRealm } from '.
 
 export type { Transform } from './Transform';
 export { createTransform, distance, angleTo } from './Transform';
+
+export type { Vision, Wall } from './Vision';
+export { createVision, createWall } from './Vision';

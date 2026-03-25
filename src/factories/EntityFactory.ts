@@ -5,7 +5,7 @@ import {
   createTransform, createSprite, createCultivation,
   createAttributes, createIdentity, createCombat,
   createSkills, createInventory, createEquipment,
-  createAnimation, CultivationPath,
+  createAnimation, createVision, createWall, CultivationPath,
 } from '@/components';
 
 export class EntityFactory {
@@ -30,6 +30,7 @@ export class EntityFactory {
     this.world.addComponent(entity, 'Skills', createSkills(path));
     this.world.addComponent(entity, 'Inventory', createInventory());
     this.world.addComponent(entity, 'Equipment', createEquipment());
+    this.world.addComponent(entity, 'Vision', createVision());
     this.world.addComponent(entity, 'PlayerTag', {});
 
     return entity;
@@ -64,10 +65,22 @@ export class EntityFactory {
     return entity;
   }
 
+  // 创建墙体
+  createWall(x: number, y: number, blockRadius: number = 24): Entity {
+    const entity = this.world.createEntity();
+
+    this.world.addComponent(entity, 'Transform', createTransform(x, y));
+    this.world.addComponent(entity, 'Sprite', createSprite('wall'));
+    this.world.addComponent(entity, 'Animation', createAnimation());
+    this.world.addComponent(entity, 'Wall', createWall(blockRadius));
+
+    return entity;
+  }
+
   // 创建技能弹道
   createProjectile(
-    x: number, 
-    y: number, 
+    x: number,
+    y: number,
     rotation: number,
     skillId: string,
     owner: Entity

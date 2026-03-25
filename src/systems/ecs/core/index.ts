@@ -3,3 +3,4 @@
 export { AttributeSystem } from './AttributeSystem';
 export { MovementSystem } from './MovementSystem';
 export { RenderSystem } from './RenderSystem';
+export { VisionSystem } from './VisionSystem';
